@@ -1,0 +1,27 @@
+<div class="col-xs-12">
+    <p>Add new Servers or blueprints!</p>
+    <label>Server Name</label>
+    <!-- Two way data binding -->
+    <!-- <input type="text" class="form-control" [(ngModel)]="serverNameInput"> -->
+
+    <!-- one way data binding using Local References to HTML elements -->
+    <input type="text" class="form-control" #serverNameInput > 
+    <!-- serverNameInput now contains this input element. Now to use this we have to pass to component using methods -->
+
+    <label>Server Content</label>
+    <!-- here also we can use one way data binding using Local References to HTML elements -->
+    <!-- <input type="text" class="form-control" [(ngModel)]="newServerContent"> -->
+
+    <!-- using @ViewChild instead of 2 way data binding. @ViewChild will be used directly in Typescript. -->
+    <input type="text" class="form-control" #serverContentInput > 
+
+    <br>
+
+    <!-- serverNameInput i.e we passed the whole input element to our method and using serverNameInput.value we can get input value now -->
+    <button
+      class="btn btn-primary"
+      (click)="onAddServer(serverNameInput)">Add Server</button>
+    <button
+      class="btn btn-primary"
+      (click)="onAddBlueprint(serverNameInput)">Add Server Blueprint</button>
+  </div>

@@ -5,12 +5,25 @@
         Only show odd numbers
       </button>
       <br /><br />
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let num of numbers">{{ num }}</li>
+      <ul class="list-group" [ngStyle]="{ color: onlyOdd ? 'red' : 'green' }">
+        <div *ngIf="onlyOdd" ngClass="odd = onlyOdd">
+          <li class="list-group-item" *ngFor="let odd of oddNum">{{ odd }}</li>
+        </div>
+        <div *ngIf="!onlyOdd" ngClass="even = !onlyOdd">
+          <li class="list-group-item" *ngFor="let even of evenNum">
+            {{ even }}
+          </li>
+        </div>
       </ul>
-      <ng-template [ngIf]="onlyOdd">
-        <p>Only odd</p>
-      </ng-template>
+      <ng-template [ngIf]="onlyOdd"> </ng-template>
+      <p appBasicHighlight>
+        Para with custom highlight Directive. Using DOM directly. Not a good
+        way.
+      </p>
+      <p appBetterHighlight>
+        Para with custom highlight Directive. Using Renderer. Better way, always
+        use this
+      </p>
     </div>
   </div>
 </div>

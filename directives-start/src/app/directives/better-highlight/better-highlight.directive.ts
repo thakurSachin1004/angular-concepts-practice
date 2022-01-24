@@ -3,6 +3,7 @@ import {
   ElementRef,
   HostBinding,
   HostListener,
+  Input,
   OnInit,
   Renderer2,
 } from "@angular/core";
@@ -13,16 +14,21 @@ import {
 export class BetterHighlightDirective implements OnInit {
   constructor(private elref: ElementRef, private renderer: Renderer2) {} // Angular will pass the element ref on which we have used this directive.
 
+  @Input() defaultColor: string = "transparent";
+  @Input() hoverColor: string = "yellow";
+
   // instead of Renderer using Host Binding to change properties of HTML elt. Here we need style property and to change background So we used style.background as property.
-  @HostBinding("style.background") backgroundColor: string = "transparent";
+  @HostBinding("style.background") backgroundColor: string;
+  @HostBinding("style.padding") padding: string = "20px";
 
   ngOnInit(): void {
-    this.renderer.setStyle(
-      this.elref.nativeElement,
-      "background-color",
-      "transparent"
-    );
-    this.renderer.setStyle(this.elref.nativeElement, "padding", "20px");
+    // this.renderer.setStyle(
+    //   this.elref.nativeElement,
+    //   "background-color",
+    //   "transparent"
+    // );
+    // this.renderer.setStyle(this.elref.nativeElement, "padding", "20px");
+    this.backgroundColor = this.defaultColor;
   }
 
   @HostListener("mouseenter") onHover(eventData: Event) {
@@ -33,7 +39,7 @@ export class BetterHighlightDirective implements OnInit {
     //   "background-color",
     //   "green"
     // );
-    this.backgroundColor = "green";
+    this.backgroundColor = this.hoverColor;
   }
 
   @HostListener("mouseleave") onMouseLeave(eventData: Event) {
@@ -44,6 +50,6 @@ export class BetterHighlightDirective implements OnInit {
     //   "background-color",
     //   "blue"
     // );
-    this.backgroundColor = "transparent";
+    this.backgroundColor = this.defaultColor;
   }
 }

@@ -15,7 +15,21 @@
           </li>
         </div>
       </ul>
-      <ng-template [ngIf]="onlyOdd"> </ng-template>
+
+      <br />
+      <!-- USING OUR OWN STRUCTURAL DIRECTIVE -->
+      <h4>USING OUR OWN STRUCTURAL DIRECTIVE</h4>
+      <ul class="list-group" [ngStyle]="{ color: onlyOdd ? 'red' : 'green' }">
+        <div *appUnless="!onlyOdd" ngClass="odd = onlyOdd">
+          <li class="list-group-item" *ngFor="let odd of oddNum">{{ odd }}</li>
+        </div>
+        <div *appUnless="onlyOdd" ngClass="even = !onlyOdd">
+          <li class="list-group-item" *ngFor="let even of evenNum">
+            {{ even }}
+          </li>
+        </div>
+      </ul>
+
       <p appBasicHighlight>
         Para with custom highlight Directive. Using DOM directly. Not a good
         way.

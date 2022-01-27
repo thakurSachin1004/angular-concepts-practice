@@ -1,3 +1,5 @@
+import { EventEmitter } from "@angular/core";
+
 export class AccountService {
   accounts = [
     {
@@ -13,6 +15,8 @@ export class AccountService {
       status: "unknown",
     },
   ];
+
+  statusUpdateEv = new EventEmitter<string>();
 
   addAccount(name: string, status: string) {
     this.accounts.push({ name, status });

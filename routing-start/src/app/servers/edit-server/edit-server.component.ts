@@ -1,27 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Params } from "@angular/router";
 
-import { ServersService } from '../servers.service';
+import { ServersService } from "../servers.service";
 
 @Component({
-  selector: 'app-edit-server',
-  templateUrl: './edit-server.component.html',
-  styleUrls: ['./edit-server.component.css']
+  selector: "app-edit-server",
+  templateUrl: "./edit-server.component.html",
+  styleUrls: ["./edit-server.component.css"],
 })
 export class EditServerComponent implements OnInit {
-  server: {id: number, name: string, status: string};
-  serverName = '';
-  serverStatus = '';
+  server: { id: number; name: string; status: string };
+  serverName = "";
+  serverStatus = "";
+  allowEditServer = true;
 
-  constructor(private serversService: ServersService) { }
+  constructor(
+    private serversService: ServersService,
+    private activatedRoute: ActivatedRoute
+  ) {}
+
+  toggleAllowEdit() {
+    // this.activatedRoute.queryParams.subscribe((queryParams: Params) => {
+    //   this.allowEditServer = queryParams["allowEdit"] === 1 ? true : false;
+    // });
+    console.log(this.activatedRoute.snapshot.queryParams["allowEdit"]);
+    this.allowEditServer =
+      +this.activatedRoute.snapshot.queryParams["allowEdit"] === 1
+        ? true
+        : false;
+  }
 
   ngOnInit() {
-    this.server = this.serversService.getServer(1);
+    const id = this.activatedRoute.snapshot.params["id"];
+    this.server = this.serversService.getServer(Number(id));
     this.serverName = this.server.name;
     this.serverStatus = this.server.status;
+    this.toggleAllowEdit();
   }
 
   onUpdateServer() {
-    this.serversService.updateServer(this.server.id, {name: this.serverName, status: this.serverStatus});
+    this.serversService.updateServer(this.server.id, {
+      name: this.serverName,
+      status: this.serverStatus,
+    });
   }
-
 }

@@ -14,6 +14,8 @@ export class EditServerComponent implements OnInit {
   serverStatus = "";
   allowEditServer = true;
 
+  // will see how to Prefetch data before a component is rendered
+
   constructor(
     private serversService: ServersService,
     private activatedRoute: ActivatedRoute

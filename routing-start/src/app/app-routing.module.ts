@@ -30,7 +30,11 @@ const appRoutes: Routes = [
       { path: ":id/edit", component: EditServerComponent },
     ],
   },
-  { path: "not-found", component: PageNotFoundComponent },
+  {
+    path: "not-found",
+    component: PageNotFoundComponent,
+    data: { message: "This page doesn't exist" }, // passing static data to component
+  },
   { path: "**", redirectTo: "/not-found" },
 ];
 

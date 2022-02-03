@@ -30,7 +30,7 @@ const appRoutes: Routes = [
       {
         path: ":id",
         component: ServerComponent,
-        resolve: { server: ServerResolver },
+        resolve: { server: ServerResolver }, // the key is important here with this key only we will be getting the data from resolver in our component
       },
       { path: ":id/edit", component: EditServerComponent },
     ],
